@@ -1,0 +1,21 @@
+export const skills = [
+  { name: "HTML5", iconKey: "html", color: "text-[#E34F26]", bg: "bg-[#E34F26]/10" },
+  { name: "CSS3", iconKey: "css", color: "text-[#1572B6]", bg: "bg-[#1572B6]/10" },
+  { name: "JavaScript", iconKey: "javascript", color: "text-[#F7DF1E]", bg: "bg-[#F7DF1E]/20" },
+  { name: "React", iconKey: "react", color: "text-[#61DAFB]", bg: "bg-[#61DAFB]/10" },
+  { name: "Tailwind CSS", iconKey: "tailwind", color: "text-[#06B6D4]", bg: "bg-[#06B6D4]/10" },
+  { name: "Node.js", iconKey: "node", color: "text-[#339933]", bg: "bg-[#339933]/10" },
+  { name: "Express.js", iconKey: "express", color: "text-[#222222]", bg: "bg-gray-200" },
+  { name: "MongoDB", iconKey: "mongodb", color: "text-[#47A248]", bg: "bg-[#47A248]/10" },
+  { name: "MySQL", iconKey: "mysql", color: "text-[#4479A1]", bg: "bg-[#4479A1]/10" },
+  { name: "Java", iconKey: "java", color: "text-[#E76F00]", bg: "bg-[#E76F00]/10" },
+  { name: "Kotlin", iconKey: "kotlin", color: "text-[#7F52FF]", bg: "bg-[#7F52FF]/10" },
+  { name: "PHP", iconKey: "php", color: "text-[#777BB4]", bg: "bg-[#777BB4]/10" },
+  { name: "Dart", iconKey: "dart", color: "text-[#0175C2]", bg: "bg-[#0175C2]/10" },
+  { name: "Flutter", iconKey: "flutter", color: "text-[#02569B]", bg: "bg-[#02569B]/10" },
+  { name: "Git", iconKey: "git", color: "text-[#F05032]", bg: "bg-[#F05032]/10" },
+  { name: "GitHub", iconKey: "github", color: "text-[#181717]", bg: "bg-gray-200" },
+  { name: "Postman", iconKey: "postman", color: "text-[#FF6C37]", bg: "bg-[#FF6C37]/10" },
+  { name: "Playwright", iconKey: "playwright", color: "text-[#2EAD33]", bg: "bg-[#2EAD33]/10" },
+  { name: "Android Studio", iconKey: "androidstudio", color: "text-[#3DDC84]", bg: "bg-[#3DDC84]/10" }
+];

@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+@theme {
+  --color-dark-bg: #070B2A;
+  --color-dark-secondary: #0D123D;
+  --color-brand-purple: #7C3AED;
+  --color-brand-light-purple: #8B5CF6;
+  --color-brand-blue: #3B82F6;
+  --color-brand-text: #16172B;
+  --color-brand-muted: #6B7280;
+  --color-light-surface: #F7F7FC;
+  --font-sans: Inter, sans-serif;
+  --font-heading: Poppins, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-dark-bg);
+  color: var(--color-light-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+@layer utilities {
+  .max-w-content {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .card-rounded {
+    border-radius: 20px;
+  }
+}
