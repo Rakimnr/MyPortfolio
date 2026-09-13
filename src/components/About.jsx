@@ -90,7 +90,7 @@ export default function About() {
             variants={{ visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } } }}
           >
             <StatCard 
-              value="6" label="Selected Projects" icon={Folder} 
+              value="10+" label="Projects" icon={Folder} 
               bgClass="bg-[#F3E8FF]" textClass="text-[#9333EA]" iconColorClass="text-[#9333EA]" 
             />
             <StatCard 
