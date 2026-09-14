@@ -3,12 +3,15 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin, Send, MessageSquare, Phone } from 'lucide-react';
 import { FaLinkedin } from 'react-icons/fa';
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xljeqwkd";
+
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors]     = useState({});
+  const [status, setStatus]     = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
   const [imageError, setImageError] = useState(false);
 
+  // ── Validation (unchanged) ──────────────────────────────────────────────────
   const validate = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = 'Name is required';
@@ -23,22 +26,45 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  // ── Formspree submission ────────────────────────────────────────────────────
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      setSubmitted(true);
-      // Construct mailto link
-      const mailtoLink = `mailto:rakindur03@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}\n\n---\nSource: Portfolio Contact Form (rakimnr.dev)`
-      )}`;
-      
-      // Delay mailto slightly to allow success state to render
-      setTimeout(() => {
-        window.location.href = mailtoLink;
-        setTimeout(() => setSubmitted(false), 3000); // Reset after 3 seconds
-      }, 500);
+    if (!validate()) return;
+
+    setStatus('loading');
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name:      formData.name,
+          email:     formData.email,
+          subject:   formData.subject,
+          message:   formData.message,
+          source:    'Rakindu Rajapaksha Portfolio',
+          portfolio: 'https://rakindu-rajapaksha.vercel.app',
+        }),
+      });
+
+      if (res.ok) {
+        setStatus('success');
+        // Reset fields only on success
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setErrors({});
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
     }
   };
+
+  const isLoading = status === 'loading';
+
 
   return (
     <section id="contact" className="relative bg-gradient-to-br from-[#25145F] via-[#33267F] to-[#5B32CE] pt-[64px] lg:pt-[72px] pb-[64px] lg:pb-[72px] overflow-hidden z-10">
@@ -123,16 +149,37 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="w-full bg-[rgba(255,255,255,0.97)] backdrop-blur-xl rounded-[18px] lg:rounded-[22px] p-5 lg:p-[26px] shadow-[0_15px_30px_rgba(0,0,0,0.15)] border border-white/20 min-w-0"
           >
-            {submitted ? (
-              <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-center w-full">
-                <div className="w-14 h-14 rounded-full bg-[#10B981]/10 flex items-center justify-center text-[#10B981] mb-4">
-                  <Send size={24} />
+            {/* ── Accessible status region ── */}
+            <div aria-live="polite" aria-atomic="true">
+              {status === 'success' && (
+                <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-center w-full">
+                  <div className="w-14 h-14 rounded-full bg-[#10B981]/10 flex items-center justify-center text-[#10B981] mb-4">
+                    <Send size={24} />
+                  </div>
+                  <h3 className="text-[18px] font-heading font-bold text-[#16172B] mb-2">Message Sent!</h3>
+                  <p className="text-[14px] text-[#4B5563]">
+                    Message sent successfully! I'll get back to you soon.
+                  </p>
                 </div>
-                <h3 className="text-[18px] font-heading font-bold text-[#16172B] mb-2">Message Ready!</h3>
-                <p className="text-[14px] text-[#4B5563]">Opening your email client...</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
+              )}
+
+              {status === 'error' && (
+                <p className="text-[13px] text-red-500 font-medium text-center mb-3">
+                  Something went wrong. Please try again or email me directly at{' '}
+                  <a
+                    href="mailto:rakindur03@gmail.com"
+                    className="underline hover:text-red-600 transition-colors"
+                  >
+                    rakindur03@gmail.com
+                  </a>
+                  .
+                </p>
+              )}
+            </div>
+
+            {/* Form — hidden only when submission succeeded */}
+            {status !== 'success' && (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full" noValidate>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                   <div className="flex flex-col min-w-0">
                     <label htmlFor="name" className="text-[12px] lg:text-[13px] font-semibold text-[#374151] mb-1.5">Your Name</label>
@@ -142,7 +189,8 @@ export default function Contact() {
                       placeholder="John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className={`w-full box-border h-[44px] lg:h-[46px] px-4 rounded-[10px] bg-[#F9FAFB] border ${errors.name ? 'border-red-400 focus:ring-red-400/20' : 'border-[#E5E7EB] focus:border-[#9333EA] focus:ring-[#9333EA]/20'} outline-none focus:ring-4 focus:bg-white transition-all text-[14px] text-[#16172B] placeholder:text-[#9CA3AF]`}
+                      disabled={isLoading}
+                      className={`w-full box-border h-[44px] lg:h-[46px] px-4 rounded-[10px] bg-[#F9FAFB] border ${errors.name ? 'border-red-400 focus:ring-red-400/20' : 'border-[#E5E7EB] focus:border-[#9333EA] focus:ring-[#9333EA]/20'} outline-none focus:ring-4 focus:bg-white transition-all text-[14px] text-[#16172B] placeholder:text-[#9CA3AF] disabled:opacity-60`}
                     />
                     {errors.name && <span className="text-[11px] text-red-500 mt-1 font-medium">{errors.name}</span>}
                   </div>
@@ -154,7 +202,8 @@ export default function Contact() {
                       placeholder="john@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className={`w-full box-border h-[44px] lg:h-[46px] px-4 rounded-[10px] bg-[#F9FAFB] border ${errors.email ? 'border-red-400 focus:ring-red-400/20' : 'border-[#E5E7EB] focus:border-[#9333EA] focus:ring-[#9333EA]/20'} outline-none focus:ring-4 focus:bg-white transition-all text-[14px] text-[#16172B] placeholder:text-[#9CA3AF]`}
+                      disabled={isLoading}
+                      className={`w-full box-border h-[44px] lg:h-[46px] px-4 rounded-[10px] bg-[#F9FAFB] border ${errors.email ? 'border-red-400 focus:ring-red-400/20' : 'border-[#E5E7EB] focus:border-[#9333EA] focus:ring-[#9333EA]/20'} outline-none focus:ring-4 focus:bg-white transition-all text-[14px] text-[#16172B] placeholder:text-[#9CA3AF] disabled:opacity-60`}
                     />
                     {errors.email && <span className="text-[11px] text-red-500 mt-1 font-medium">{errors.email}</span>}
                   </div>
@@ -168,7 +217,8 @@ export default function Contact() {
                     placeholder="Project collaboration"
                     value={formData.subject}
                     onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                    className={`w-full box-border h-[44px] lg:h-[46px] px-4 rounded-[10px] bg-[#F9FAFB] border ${errors.subject ? 'border-red-400 focus:ring-red-400/20' : 'border-[#E5E7EB] focus:border-[#9333EA] focus:ring-[#9333EA]/20'} outline-none focus:ring-4 focus:bg-white transition-all text-[14px] text-[#16172B] placeholder:text-[#9CA3AF]`}
+                    disabled={isLoading}
+                    className={`w-full box-border h-[44px] lg:h-[46px] px-4 rounded-[10px] bg-[#F9FAFB] border ${errors.subject ? 'border-red-400 focus:ring-red-400/20' : 'border-[#E5E7EB] focus:border-[#9333EA] focus:ring-[#9333EA]/20'} outline-none focus:ring-4 focus:bg-white transition-all text-[14px] text-[#16172B] placeholder:text-[#9CA3AF] disabled:opacity-60`}
                   />
                   {errors.subject && <span className="text-[11px] text-red-500 mt-1 font-medium">{errors.subject}</span>}
                 </div>
@@ -180,20 +230,23 @@ export default function Contact() {
                     placeholder="Tell me about your project or idea..."
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className={`w-full box-border min-h-[110px] lg:min-h-[125px] p-4 rounded-[10px] bg-[#F9FAFB] border ${errors.message ? 'border-red-400 focus:ring-red-400/20' : 'border-[#E5E7EB] focus:border-[#9333EA] focus:ring-[#9333EA]/20'} outline-none focus:ring-4 focus:bg-white transition-all text-[14px] text-[#16172B] resize-none placeholder:text-[#9CA3AF]`}
+                    disabled={isLoading}
+                    className={`w-full box-border min-h-[110px] lg:min-h-[125px] p-4 rounded-[10px] bg-[#F9FAFB] border ${errors.message ? 'border-red-400 focus:ring-red-400/20' : 'border-[#E5E7EB] focus:border-[#9333EA] focus:ring-[#9333EA]/20'} outline-none focus:ring-4 focus:bg-white transition-all text-[14px] text-[#16172B] resize-none placeholder:text-[#9CA3AF] disabled:opacity-60`}
                   />
                   {errors.message && <span className="text-[11px] text-red-500 mt-1 font-medium">{errors.message}</span>}
                 </div>
 
                 <button 
                   type="submit"
-                  className="mt-2 w-full h-[48px] lg:h-[50px] rounded-[10px] bg-gradient-to-r from-brand-blue to-brand-purple text-white font-semibold text-[15px] flex items-center justify-center gap-2 hover:-translate-y-[2px] hover:shadow-[0_8px_20px_rgba(147,51,234,0.3)] transition-all duration-300"
+                  disabled={isLoading}
+                  className="mt-2 w-full h-[48px] lg:h-[50px] rounded-[10px] bg-gradient-to-r from-brand-blue to-brand-purple text-white font-semibold text-[15px] flex items-center justify-center gap-2 hover:-translate-y-[2px] hover:shadow-[0_8px_20px_rgba(147,51,234,0.3)] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none"
                 >
-                  Send Message
-                  <Send size={18} />
+                  {isLoading ? 'Sending...' : 'Send Message'}
+                  {!isLoading && <Send size={18} />}
                 </button>
               </form>
             )}
+
           </motion.div>
 
           {/* Right Illustration */}
