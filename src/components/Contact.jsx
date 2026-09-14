@@ -29,7 +29,7 @@ export default function Contact() {
       setSubmitted(true);
       // Construct mailto link
       const mailtoLink = `mailto:rakindur03@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}\n\n---\nSource: Portfolio Contact Form (rakimnr.dev)`
       )}`;
       
       // Delay mailto slightly to allow success state to render
