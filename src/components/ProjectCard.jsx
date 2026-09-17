@@ -24,20 +24,41 @@ export default function ProjectCard({ project, onOpenModal, index }) {
             <span className="text-[13px] font-heading font-semibold text-[#16172B]/80">{project.title} Preview</span>
           </div>
         ) : project.imageType === 'cover' ? (
-          <div className="w-full h-full bg-gradient-to-br from-[#1E1B4B] to-[#312E81] flex flex-col items-center justify-center p-6 relative transition-transform duration-300 group-hover:scale-[1.03]">
-            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, rgba(255,255,255,0.3) 1px, transparent 1px)', backgroundSize: '12px 12px' }} />
-            <FolderCode size={36} className="text-white/80 mb-3 relative z-10" />
-            <span className="text-[18px] font-heading font-bold text-white text-center leading-tight mb-3 relative z-10">
-              {project.title}
-            </span>
-            <div className="flex gap-2 flex-wrap justify-center relative z-10">
-              {project.technologies.slice(0, 3).map(t => (
-                <span key={t} className="text-[10px] px-2 py-0.5 rounded-[4px] bg-white/10 text-white border border-white/20 uppercase tracking-wider font-semibold">
-                  {t}
-                </span>
-              ))}
+          project.coverVariant === 'singlish' ? (
+            // ── Singlish → සිංහල custom cover ──
+            <div className="w-full h-full bg-gradient-to-br from-[#1E1B4B] via-[#312E81] to-[#4C1D95] flex flex-col items-center justify-center p-4 relative transition-transform duration-300 group-hover:scale-[1.03]">
+              <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at center, rgba(255,255,255,0.4) 1px, transparent 1px)', backgroundSize: '14px 14px' }} />
+              <div className="relative z-10 flex items-center gap-3 mb-3">
+                <span className="text-[15px] lg:text-[17px] font-mono font-bold text-white/90 tracking-wide">Singlish</span>
+                <span className="text-[18px] lg:text-[22px] text-[#C4B5FD] font-bold">→</span>
+                <span className="text-[17px] lg:text-[20px] font-bold text-white" style={{ fontFamily: 'serif' }}>සිංහල</span>
+              </div>
+              <div className="relative z-10 flex gap-2 flex-wrap justify-center">
+                {project.technologies.slice(0, 3).map(t => (
+                  <span key={t} className="text-[10px] px-2 py-0.5 rounded-[4px] bg-white/10 text-white border border-white/20 uppercase tracking-wider font-semibold">
+                    {t}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            // ── Generic cover (Event Management etc.) ──
+            <div className="w-full h-full bg-gradient-to-br from-[#1E1B4B] to-[#312E81] flex flex-col items-center justify-center p-6 relative transition-transform duration-300 group-hover:scale-[1.03]">
+              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, rgba(255,255,255,0.3) 1px, transparent 1px)', backgroundSize: '12px 12px' }} />
+              <FolderCode size={36} className="text-white/80 mb-3 relative z-10" />
+              <span className="text-[18px] font-heading font-bold text-white text-center leading-tight mb-3 relative z-10">
+                {project.title}
+              </span>
+              <div className="flex gap-2 flex-wrap justify-center relative z-10">
+                {project.technologies.slice(0, 3).map(t => (
+                  <span key={t} className="text-[10px] px-2 py-0.5 rounded-[4px] bg-white/10 text-white border border-white/20 uppercase tracking-wider font-semibold">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )
+
         ) : project.imageType === 'logo' ? (
           <div className="w-full h-full bg-[#F8F9FA] flex items-center justify-center p-[32px]">
             <img 

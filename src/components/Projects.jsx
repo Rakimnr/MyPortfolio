@@ -120,20 +120,41 @@ export default function Projects() {
                 {/* Modal Image Area */}
                 <div className="relative w-full aspect-video lg:max-h-[360px] bg-[#F7F7FC] flex items-center justify-center border-b border-[#ECECF4] shrink-0 overflow-hidden group">
                    {selectedProject.imageType === 'cover' ? (
-                     <div className="w-full h-full bg-gradient-to-br from-[#1E1B4B] to-[#312E81] flex flex-col items-center justify-center p-6 relative transition-transform duration-300 group-hover:scale-[1.02]">
-                       <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, rgba(255,255,255,0.3) 1px, transparent 1px)', backgroundSize: '12px 12px' }} />
-                       <FolderCode size={40} className="text-white/80 mb-3 relative z-10" />
-                       <span className="text-[20px] font-heading font-bold text-white text-center leading-tight mb-3 relative z-10">
-                         {selectedProject.title}
-                       </span>
-                       <div className="flex gap-2 flex-wrap justify-center relative z-10">
-                         {selectedProject.technologies.slice(0, 3).map(t => (
-                           <span key={t} className="text-[11px] px-2 py-0.5 rounded-[4px] bg-white/10 text-white border border-white/20 uppercase tracking-wider font-semibold">
-                             {t}
-                           </span>
-                         ))}
+                     selectedProject.coverVariant === 'singlish' ? (
+                       // ── Singlish → සිංහල custom cover (modal) ──
+                       <div className="w-full h-full bg-gradient-to-br from-[#1E1B4B] via-[#312E81] to-[#4C1D95] flex flex-col items-center justify-center p-6 relative transition-transform duration-300 group-hover:scale-[1.02]">
+                         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at center, rgba(255,255,255,0.4) 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
+                         <div className="relative z-10 flex items-center gap-4 mb-4">
+                           <span className="text-[20px] font-mono font-bold text-white/90 tracking-wide">Singlish</span>
+                           <span className="text-[26px] text-[#C4B5FD] font-bold">→</span>
+                           <span className="text-[22px] font-bold text-white" style={{ fontFamily: 'serif' }}>සිංහල</span>
+                         </div>
+                         <div className="flex gap-2 flex-wrap justify-center relative z-10">
+                           {selectedProject.technologies.slice(0, 3).map(t => (
+                             <span key={t} className="text-[11px] px-2 py-0.5 rounded-[4px] bg-white/10 text-white border border-white/20 uppercase tracking-wider font-semibold">
+                               {t}
+                             </span>
+                           ))}
+                         </div>
                        </div>
-                     </div>
+                     ) : (
+                       // ── Generic cover (modal) ──
+                       <div className="w-full h-full bg-gradient-to-br from-[#1E1B4B] to-[#312E81] flex flex-col items-center justify-center p-6 relative transition-transform duration-300 group-hover:scale-[1.02]">
+                         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, rgba(255,255,255,0.3) 1px, transparent 1px)', backgroundSize: '12px 12px' }} />
+                         <FolderCode size={40} className="text-white/80 mb-3 relative z-10" />
+                         <span className="text-[20px] font-heading font-bold text-white text-center leading-tight mb-3 relative z-10">
+                           {selectedProject.title}
+                         </span>
+                         <div className="flex gap-2 flex-wrap justify-center relative z-10">
+                           {selectedProject.technologies.slice(0, 3).map(t => (
+                             <span key={t} className="text-[11px] px-2 py-0.5 rounded-[4px] bg-white/10 text-white border border-white/20 uppercase tracking-wider font-semibold">
+                               {t}
+                             </span>
+                           ))}
+                         </div>
+                       </div>
+                     )
+
                    ) : selectedProject.imageType === 'logo' ? (
                      <div className="w-full h-full bg-[#F8F9FA] flex items-center justify-center p-[40px]">
                        <img 
