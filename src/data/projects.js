@@ -12,8 +12,34 @@ export const projects = [
     alt: "Uni-Find university lost and found portal preview",
     github: "https://github.com/Rakimnr/Uni-Find",
     demo: "",
-    featured: true
+    featured: true,
+    details: {
+      type: "University Lost & Found Management System",
+      overview:
+        "Uni-Find is a full-stack university lost-and-found platform built to replace manual processes — notice boards, security-desk logbooks, and word-of-mouth — with a centralized digital workflow. Students and staff can report lost or found items, browse the listings, submit ownership claims, and track their requests through a dedicated dashboard. Administrators get a separate management interface to oversee items, claims, and user activity.",
+      context: "Personal full-stack university project.",
+      features: [
+        "Browse found items and lost-item reports",
+        "Report lost or found items with image uploads",
+        "Submit ownership claims for found items",
+        "Track personal claims and lost-item reports via dashboard",
+        "Separate user and admin dashboards",
+        "Admin management of found items, lost items, and claims",
+        "Protected routes with role-based access control",
+      ],
+      implementation: [
+        "Frontend: React + Vite",
+        "HTTP communication: Axios",
+        "Backend: Node.js + Express REST API",
+        "Database: MongoDB + Mongoose",
+        "File uploads: Multer (backend image handling)",
+        "Authentication: Session-based auth",
+        "Testing: Playwright end-to-end test suite",
+      ],
+      technologiesModal: ["React", "Vite", "Axios", "Node.js", "Express", "MongoDB", "Mongoose", "Multer", "Playwright"],
+    },
   },
+
   // ── 2 ── Featured (visible by default)
   {
     id: 2,
@@ -27,8 +53,34 @@ export const projects = [
     alt: "MediCore hospital management system preview",
     github: "https://github.com/sanjuladilhara20020116/Hospital-Management-System",
     demo: "",
-    featured: true
+    featured: true,
+    details: {
+      type: "Hospital Management System",
+      overview:
+        "MediCore is a modular MERN-based university group project that digitizes clinical and administrative hospital workflows. The complete system covers appointment scheduling, medical records, vaccination services, lab reporting, healthcare package management, and patient utilities — each built as an independent module under a shared architecture.",
+      context: "University group project. My individual contributions were the Vaccination Portal and BMI Calculator modules.",
+      features: [
+        "Role-based patient, doctor, and admin experience",
+        "Appointment scheduling and management",
+        "Medical record creation and retrieval",
+        "Vaccination record management (my contribution)",
+        "Lab report management",
+        "Healthcare package management",
+      ],
+      myContribution: [
+        "Vaccination Portal: vaccination record creation, patient vaccination history, and record validation",
+        "BMI Calculator: patient BMI calculation utility",
+      ],
+      implementation: [
+        "Frontend: React",
+        "Backend: Node.js + Express",
+        "Database: MongoDB + Mongoose",
+        "Architecture: REST-based modular design — each feature area is an independent module",
+      ],
+      technologiesModal: ["React", "Node.js", "Express", "MongoDB", "Mongoose"],
+    },
   },
+
   // ── 3 ── Featured (visible by default)
   {
     id: 3,
@@ -42,8 +94,34 @@ export const projects = [
     alt: "Smart Campus Operations Hub platform preview",
     github: "https://github.com/HASHINI-MARASINGHE/it3030-paf-2026-smart-campus-groupWD_46_2.2",
     demo: "",
-    featured: true
+    featured: true,
+    details: {
+      type: "University Campus Management Platform",
+      overview:
+        "Smart Campus Operations Hub is a full-stack university operations platform developed for the IT3030 Programming Applications and Frameworks module. It centralizes the management of campus resources, facility bookings, maintenance and support tickets, real-time notifications, and role-based authentication — providing a unified system for students, staff, and administrators.",
+      context: "Developed as part of an academic team project for the IT3030 Programming Applications and Frameworks module.",
+      features: [
+        "Manage campus resources such as labs, halls, and equipment",
+        "Search and filter available resources",
+        "Request and manage resource bookings",
+        "Approve or reject bookings and prevent scheduling conflicts",
+        "Create and track maintenance and support tickets",
+        "Real-time booking and ticket notifications",
+        "Role-based authentication and protected routes",
+      ],
+      implementation: [
+        "Backend: Java + Spring Boot",
+        "Data layer: Spring Data JPA",
+        "Security: Spring Security",
+        "Build tool: Maven",
+        "Frontend: React + Vite",
+        "HTTP communication: Axios",
+        "Database: MySQL",
+      ],
+      technologiesModal: ["Java", "Spring Boot", "Spring Data JPA", "Spring Security", "Maven", "React", "Vite", "Axios", "MySQL"],
+    },
   },
+
   // ── 4 ── Revealed on "View All"
   {
     id: 4,
@@ -56,8 +134,32 @@ export const projects = [
     alt: "Together youth club management application logo",
     github: "https://github.com/Rakimnr/Together",
     demo: "",
-    featured: false
+    featured: false,
+    details: {
+      type: "Youth Club Management Android Application",
+      overview:
+        "Together is a native Android application designed to organize all youth-club operations within one mobile app. It brings together member management, task tracking, project and event planning, budget management, onboarding, and personal profile features — giving youth-club teams a single place to coordinate their activities.",
+      context: "Android application project.",
+      features: [
+        "3-step onboarding flow for new users",
+        "Login and two-step registration",
+        "Home dashboard with quick statistics and recent activities",
+        "Member management and attendance tracking",
+        "Task creation and assignment",
+        "Project and event planning",
+        "Budget income and expense tracking",
+      ],
+      implementation: [
+        "Language: Kotlin",
+        "UI: XML layouts with ConstraintLayout and CardView",
+        "Navigation: Activity-based navigation",
+        "State persistence: SharedPreferences for onboarding state",
+        "Offline-first frontend implementation — backend not yet implemented",
+      ],
+      technologiesModal: ["Kotlin", "XML", "ConstraintLayout", "CardView", "SharedPreferences", "Android Studio"],
+    },
   },
+
   // ── 5 ── Revealed on "View All"
   {
     id: 5,
@@ -71,8 +173,32 @@ export const projects = [
     alt: "GPA Portal calculator interface preview",
     github: "https://github.com/Rakimnr/Gpa-Portal",
     demo: "https://gpa-calculator-bice.vercel.app/",
-    featured: false
+    featured: false,
+    details: {
+      type: "GPA Calculator / Academic Utility",
+      overview:
+        "GPA Portal is a responsive web application for tracking and calculating university academic performance. Students can organize their results by semester and module, enter grades and credit hours, and get automatic GPA calculations. All data persists in the browser via localStorage, and a formatted academic PDF report can be generated and downloaded at any time — no account or backend required.",
+      context: "Personal academic utility / web application.",
+      features: [
+        "Add and manage semesters",
+        "Add modules with credit hours and grades per semester",
+        "Automatic GPA calculation with grade validation",
+        "Persistent data via localStorage — no login needed",
+        "Dark mode toggle",
+        "Downloadable formatted PDF academic report",
+      ],
+      implementation: [
+        "Frontend: React",
+        "Styling: Tailwind CSS",
+        "Language: JavaScript",
+        "PDF generation: jsPDF + jsPDF-autotable",
+        "Build tooling: Vite",
+        "Persistence: Browser localStorage (no backend)",
+      ],
+      technologiesModal: ["React", "JavaScript", "Tailwind CSS", "jsPDF", "jsPDF-autotable", "Vite"],
+    },
   },
+
   // ── 6 ── Revealed on "View All"
   {
     id: 6,
@@ -85,8 +211,32 @@ export const projects = [
     alt: "BIDME auction application logo",
     github: "https://github.com/Rakimnr/Online-Auction-System---BIDME",
     demo: "",
-    featured: false
+    featured: false,
+    details: {
+      type: "Online Auction Web Application",
+      overview:
+        "BIDME is a role-based online auction platform built as a university group project. The system provides distinct workflows for three user roles — buyers, sellers, and auctioneers/admins — each with dedicated interfaces and permissions. Buyers browse and place bids, sellers manage their auction listings, and admins oversee categories and the overall platform.",
+      context: "University group project with equal team contributions.",
+      features: [
+        "Multi-role registration and login (buyer, seller, auctioneer/admin)",
+        "Browse auction items by category",
+        "Buyer bidding with bid validation",
+        "Shipping information management",
+        "Payment upload and payment history",
+        "Seller auction-item creation and management",
+        "Auction category and admin management",
+      ],
+      implementation: [
+        "Frontend: HTML5, CSS3, JavaScript",
+        "Backend: PHP with session-based authentication",
+        "Data operations: CRUD workflows via PHP",
+        "Database: MySQL / MariaDB",
+        "Server: Apache (XAMPP / WAMP development environment)",
+      ],
+      technologiesModal: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL", "Apache", "XAMPP"],
+    },
   },
+
   // ── 7 ── Revealed on "View All"
   {
     id: 7,
@@ -98,8 +248,34 @@ export const projects = [
     imageType: "cover",
     github: "https://github.com/Rakimnr/Event_Management-Review_module",
     demo: "",
-    featured: false
+    featured: false,
+    details: {
+      type: "Java OOP / JSP Review Management Module",
+      overview:
+        "This repository contains only the Review Module — my individual contribution to a larger Event Management System. The module manages the full review lifecycle: attendees can submit event reviews, edit their existing reviews, and delete them. The module loads available events dynamically, validates all input fields, and prevents duplicate reviews from the same email-and-event combination.",
+      context: "Individual module contribution to a larger Event Management System.",
+      features: [
+        "Submit reviews for selected events",
+        "Edit existing reviews",
+        "Delete reviews",
+        "Dynamically load available events for review selection",
+        "Validate required fields on submission",
+        "Validate email address format",
+        "Prevent duplicate reviews for the same email and event",
+      ],
+      implementation: [
+        "Language: Java",
+        "View layer: JSP (JavaServer Pages)",
+        "Presentation: HTML / CSS",
+        "Pattern: MVC-style structure",
+        "Database: MySQL",
+        "Server: Apache Tomcat",
+        "Data access: reviewService.java handles all database CRUD operations",
+      ],
+      technologiesModal: ["Java", "JSP", "Servlets", "HTML", "CSS", "MySQL", "Apache Tomcat", "MVC"],
+    },
   },
+
   // ── 8 ── Revealed on "View All"
   {
     id: 8,
@@ -112,8 +288,28 @@ export const projects = [
     coverVariant: "singlish",
     github: "https://github.com/Rakimnr/Singlish-to-Sinhala-Translator",
     demo: "",
-    featured: false
-  }
+    featured: false,
+    details: {
+      type: "Playwright Automated Testing Suite — Academic Assignment",
+      overview:
+        "This repository is an automated test suite that validates the Singlish-to-Sinhala translation functionality of the third-party web application swifttranslator.com. It does not implement a translator itself. The suite was written as Assignment 1 for the IT3040 IT Project Management course (BSc IT, Year 3 Semester 1) and covers 36 test cases across positive, negative, and UI test categories.",
+      context: "Academic assignment — IT3040 IT Project Management, Year 3 Semester 1.",
+      features: [
+        "36 automated test cases across 3 test files",
+        "Positive tests: verify translation accuracy for valid Singlish inputs",
+        "Negative / edge-case tests: validate robustness against invalid inputs",
+        "UI stability tests: verify key user interactions",
+        "Configurable headed and headless execution modes",
+        "Single-worker mode available to reduce flakiness on live sites",
+      ],
+      implementation: [
+        "Runtime: Node.js",
+        "Testing framework: Playwright",
+        "Browser automation: Chromium",
+        "Test files: positive_cases.spec.js, negative_cases.spec.js, ui_cases.spec.js",
+        "Target: third-party web app (swifttranslator.com)",
+      ],
+      technologiesModal: ["Node.js", "Playwright", "Chromium"],
+    },
+  },
 ];
-
-
